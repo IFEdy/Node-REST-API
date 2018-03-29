@@ -21,7 +21,7 @@ router.get("/:qID", function(req, res){
     });
 });
 
-//POST questions/id/answers
+//POST questions/:qID/answers
 //route for creating answwers
 router.post("/:qID/answers", function(req, res){
     res.json({response: "There is a POST request to /answers",
@@ -31,11 +31,25 @@ router.post("/:qID/answers", function(req, res){
 });
 
 
-//POST questions/id/answers/:id
+//POST questions/:qID/answers/:id
 //route for editting a specific answers
-router.put("/:qID/answers/:id", function(req, res){
-
+router.put("/:qID/answers/:aID", function(req, res){
+    res.json({response: "There is a POST request to /answers/aID",
+    questiodID: req.params.qID,
+    answerID: req.params.aID,
+    body: req.body
+});
 });
 
+
+//POST questions/:qID/answers/:id
+//route to delete a specific answers
+router.delete("/:qID/answers/:aID", function(req, res){
+    res.json({response: "There is a POST request to /answers/aID",
+    questiodID: req.params.qID,
+    answerID: req.params.aID,
+    body: req.body
+});
+});
 
 module.exports = router;
