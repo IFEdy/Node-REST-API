@@ -4,8 +4,9 @@ var express = require("express");
 var app = express();
 var routes = require("./route.js");
 var jsonParser = require("body-parser").json;
-var morgan = require("morgan");
+var logger = require("morgan");
 
+app.use(logger("dev"));
 app.use(jsonParser());
 
 app.use("/questions", routes);
