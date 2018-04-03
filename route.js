@@ -5,7 +5,7 @@ var router = express();
 
 //GET questions
 router.get("/", function(req, res){
-    var o =obj.props;
+    var o = obj.props;
     res.json({response: "There is a GET request"});
 });
 
@@ -18,8 +18,7 @@ router.post("/", function(req, res){
 
 router.get("/:qID", function(req, res){
     res.json({
-        response: "There is a GET request with a specific ID " + req.params.qID,
-        questionID : req.params.qID
+        response: "There is a GET request with a specific ID " + req.params.qID
     });
 });
 
@@ -56,7 +55,15 @@ router.delete("/:qID/answers/:aID", function(req, res){
 //POST questions/:qID/answers/:aID/vote-up
 //POST questions/:qID/answers/:aID/vote-down
 //route to VOTE for a specific answers
-router.post ("/:qID/answers/:aID/vote-:dir", function(req, res){
+router.post ("/:qID/answers/:aID/vote-:dir",function(req, res){
+    if(req.params.dir.search(/^(up|down)$/) === -1){
+        var err = new Error("Not found");
+        err.status = 404;
+        next(err);
+    } else{
+        next();
+    }
+}, function(req, res){
     res.json({response: "There is a VOTE request to /answers/aID " + req.params.dir,
     questionID: req.params.qID,
     answerID: req.params.aID,

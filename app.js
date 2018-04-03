@@ -9,6 +9,8 @@ var logger = require("morgan");
 app.use(logger("dev"));
 app.use(jsonParser());
 
+app.use("/questions", routes);
+
 //  ERROR handler
 app.use(function(req, res, next){
     var err = new Error("NOT FOUND");
@@ -26,7 +28,6 @@ app.use(function(err, req, res, next){
     });
 });
 
-app.use("/questions", routes);
 var port = process.env.PORT || 3000;
 
 app.listen(port, function(){
