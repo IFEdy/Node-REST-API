@@ -5,6 +5,7 @@ var router = express();
 
 //GET questions
 router.get("/", function(req, res){
+    var o =obj.props;
     res.json({response: "There is a GET request"});
 });
 
