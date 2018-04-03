@@ -55,7 +55,7 @@ router.delete("/:qID/answers/:aID", function(req, res){
 //POST questions/:qID/answers/:aID/vote-up
 //POST questions/:qID/answers/:aID/vote-down
 //route to VOTE for a specific answers
-router.post ("/:qID/answers/:aID/vote-:dir",function(req, res){
+router.post ("/:qID/answers/:aID/vote-:dir",function(req, res, next){
     if(req.params.dir.search(/^(up|down)$/) === -1){
         var err = new Error("Not found");
         err.status = 404;
