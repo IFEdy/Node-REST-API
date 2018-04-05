@@ -12,13 +12,13 @@ db.on("error", function(err){
 db.once("open", function(){
     console.log("The connection was successful");
 
-    var schema = mongoose.Schema;
+    var Schema = mongoose.Schema;
     var AnimalSchema = new Schema({
-        type: string,
-        color: string,
-        size : string,
-        average_mass: number,
-        name: string
+        type: String,
+        color: String,
+        size : String,
+        average_mass: Number,
+        name: String
     });
 
     var Animal = mongoose.model("Animal", AnimalSchema);
@@ -31,7 +31,7 @@ db.once("open", function(){
         name: "Lawrence"
     });
 
-    Elephant.save(function(){
+    Elephant.save(function(err){
         if(err) console.error("Failed to save", err);
         else console.log("Saved");
 
