@@ -30,8 +30,7 @@ db.once("open", function(){
         average_mass: 6000,
         name: "Lawrence"
     });
-
-    var animal = new Animal({});
+   
     var Whale = new Animal({
         type: "whale",
         size: "very big",
@@ -39,17 +38,24 @@ db.once("open", function(){
         name: "Fang"
     });
 
+    var animal = new Animal({});
+
     Animal.remove({}, function(err){
         if(err) console.error(err);
-        Whale.save(function(err){
+            Elephant.save(function(err){
         if(err) console.error("Failed to save", err);
             animal.save(function(err){
         if (err) console.error("Failed to save", err);
-        Elephant.save(function(err){
+        Whale.save(function(err){
         if(err) console.error("Failed to save", err);
-            db.close(function (){
-            console.log("DB connection closed");
+            Animal.find({size:"very big"}, function(err, animals){
+                animals.forEach(function(animal){
+                    console.log(animal.name + " the " + animal.color + " " + animal.type);
+                });
+                db.close(function (){
+                     console.log("DB connection closed");
     });
+            });
     });
      });
     });
