@@ -14,11 +14,11 @@ db.once("open", function(){
 
     var Schema = mongoose.Schema;
     var AnimalSchema = new Schema({
-        type: String,
-        color: String,
-        size : String,
-        average_mass: Number,
-        name: String
+        type:  {type: String, default: "Goldfish"},
+        color: {type: String, default: "golden"},
+        size : {type: String, default: "small"},
+        average_mass: {type: Number, default: 0.0004},
+        name: {type: String, default: "Angela"}
     });
 
     var Animal = mongoose.model("Animal", AnimalSchema);
@@ -31,10 +31,13 @@ db.once("open", function(){
         name: "Lawrence"
     });
 
+    var animal = new Animal({});
+
     Elephant.save(function(err){
         if(err) console.error("Failed to save", err);
-        else console.log("Saved");
-
+        animal.save(function(err){
+            if (err) console.error("Failed to save", err);
+        });
         db.close(function (){
             console.log("DB connection closed");
         });
