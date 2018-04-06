@@ -33,14 +33,19 @@ db.once("open", function(){
 
     var animal = new Animal({});
 
-    Elephant.save(function(err){
+    Animal.remove({}, function(err){
+        if(err) console.error(err);
+            Elephant.save(function(err){
         if(err) console.error("Failed to save", err);
-        animal.save(function(err){
-            if (err) console.error("Failed to save", err);
-        });
-        db.close(function (){
+            animal.save(function(err){
+        if (err) console.error("Failed to save", err);
+            db.close(function (){
             console.log("DB connection closed");
-        });
     });
+        
+     });
+    });
+    });
+
 
 });
