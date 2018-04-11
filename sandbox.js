@@ -16,9 +16,20 @@ db.once("open", function(){
     var AnimalSchema = new Schema({
         type:  {type: String, default: "Goldfish"},
         color: {type: String, default: "golden"},
-        size : {type: String, default: "small"},
+        size : String,
         average_mass: {type: Number, default: 0.0004},
         name: {type: String, default: "Angela"}
+    });
+
+    AnimalSchema.pre("save", function(next){
+        if(this.average_mass >= 100){
+            this.size = "big";
+        }else if (this.average_mass >= 5 && this.average_mass < 100){
+            this.size = "medium";
+        }else{
+            this.size = "small"; 
+        }
+        next();
     });
 
     var Animal = mongoose.model("Animal", AnimalSchema);
